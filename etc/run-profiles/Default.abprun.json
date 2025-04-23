@@ -1,0 +1,14 @@
+﻿{
+  "applications": {
+    "Sun": {
+      "type": "dotnet-project",
+      "launchUrl": "https://localhost:44326",
+      "healthCheckEndpoint": "/health-status",
+      "healthUiEndpoint": "/health-ui",
+      "path": "../../Sun/Sun.csproj",
+      "execution": {
+        "order": 0
+      }
+    }
+  }
+}
