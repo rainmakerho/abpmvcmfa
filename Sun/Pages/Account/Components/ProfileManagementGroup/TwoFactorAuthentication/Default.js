@@ -2,27 +2,21 @@
     $(function () {
         var l = abp.localization.getResource("AbpAccount");
 
-        $('#PersonalSettingsForm').submit(function (e) {
+        $('#TwoFactorAuthForm').submit(function (e) {
             e.preventDefault();
-
-            if (!$('#PersonalSettingsForm').valid()) {
+            alert('submit'); 
+            if (!$('#TwoFactorAuthForm').valid()) {
                 return false;
             }
 
-            var input = $('#PersonalSettingsForm').serializeFormToObject(false);
-
-            volo.abp.account.profile.update(input).then(function (result) {
-                abp.notify.success(l('PersonalSettingsSaved'));
-                updateConcurrencyStamp();
-            });
+            var input = $('#TwoFactorAuthForm').serializeFormToObject(false);
+            abp.notify.success(l('PersonalSettingsSaved'));
+            //volo.abp.account.profile.update(input).then(function (result) {
+            //    abp.notify.success(l('PersonalSettingsSaved'));
+            //    updateConcurrencyStamp();
+            //});
         });
     });
 
-    abp.event.on('passwordChanged', updateConcurrencyStamp);
-
-    function updateConcurrencyStamp() {
-        volo.abp.account.profile.get().then(function (profile) {
-            $("#ConcurrencyStamp").val(profile.concurrencyStamp);
-        });
-    }
+   
 })(jQuery);

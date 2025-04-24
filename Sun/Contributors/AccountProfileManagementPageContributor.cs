@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Localization;
+using Sun.Localization;
 using Sun.Pages.Account.Components.ProfileManagementGroup.TwoFactorAuthentication;
 using System.Threading.Tasks;
 using Volo.Abp.Account.Localization;
@@ -15,7 +16,7 @@ public class CustomAccountProfileManagementPageContributor : IProfileManagementP
 {
     public async Task ConfigureAsync(ProfileManagementPageCreationContext context)
     {
-        var l = context.ServiceProvider.GetRequiredService<IStringLocalizer<AccountResource>>();
+        var l = context.ServiceProvider.GetRequiredService<IStringLocalizer<SunResource>>();
 
         context.Groups.Add(
             new ProfileManagementPageGroup(
