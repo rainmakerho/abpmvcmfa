@@ -125,4 +125,14 @@
     <Content Remove="$(UserProfile)\.nuget\packages\*\*\contentFiles\any\*\*.abppkg*" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Remove="Pages\Account\Components\ProfileManagementGroup\TwoFactorAuthentication\Default.js" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Pages\Account\Components\ProfileManagementGroup\TwoFactorAuthentication\Default.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
 </Project>

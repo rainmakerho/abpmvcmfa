@@ -1,4 +1,6 @@
-﻿(function ($) {
+﻿console.log("2FA JS loaded"); // 在 Default.js 開頭加這行
+
+(function ($) {
     $(function () {
         var l = abp.localization.getResource("AbpAccount");
 
