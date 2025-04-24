@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using Volo.Abp;
 
 namespace Sun.Services;
@@ -26,5 +27,21 @@ public class TwoFactorAuthAppService : SunAppService
         {
             throw new UserFriendlyException("無法啟用雙重身份驗證");
         }
+        await _userManager.UpdateAsync(user);
+    }
+
+    public async Task<bool> VerifyTwoFactorToken(Guid userId, string code)
+    {
+
+        var user = await _userManager.FindByIdAsync(userId.ToString());
+        if (user == null)
+        {
+            throw new UserFriendlyException("用戶不存在");
+        }
+
+        var isValid = await _userManager.VerifyTwoFactorTokenAsync(
+            user, TokenOptions.DefaultAuthenticatorProvider, code);
+
+        return isValid;
     }
 }

@@ -13,6 +13,7 @@ using Sun.Permissions;
 using Volo.Abp;
 using Volo.Abp.Account;
 using Volo.Abp.Account.Web;
+using Volo.Abp.Account.Web.Pages.Account;
 using Volo.Abp.Account.Web.ProfileManagement;
 using Volo.Abp.AspNetCore.Mvc;
 using Volo.Abp.AspNetCore.Mvc.Localization;
@@ -408,5 +409,16 @@ public class SunModule : AbpModule
         {
             options.Contributors.Add(new CustomAccountProfileManagementPageContributor());
         });
+
+        Configure<AbpBundlingOptions>(options =>
+        {
+            options.ScriptBundles.Configure(
+                typeof(ManageModel).FullName,
+                configuration =>
+                {
+                    configuration.AddFiles("/Pages/Account/Components/ProfileManagementGroup/TwoFactorAuthentication/Default.js");
+                });
+        });
+
     }
 }
