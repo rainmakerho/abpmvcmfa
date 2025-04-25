@@ -9,6 +9,7 @@ using Sun.Data;
 using Sun.HealthChecks;
 using Sun.Localization;
 using Sun.Menus;
+using Sun.Middlewares;
 using Sun.Permissions;
 using Volo.Abp;
 using Volo.Abp.Account;
@@ -387,11 +388,11 @@ public class SunModule : AbpModule
         {
             app.UseMultiTenancy();
         }
-
+        app.UseMiddleware<EnforceMfaMiddleware>();
         app.UseUnitOfWork();
         app.UseDynamicClaims();
         app.UseAuthorization();
-
+        
         app.UseSwagger();
         app.UseAbpSwaggerUI(options =>
         {
@@ -401,13 +402,14 @@ public class SunModule : AbpModule
         app.UseAuditing();
         app.UseAbpSerilogEnrichers();
         app.UseConfiguredEndpoints();
+        
     }
 
     private void ConfigureProfileManagementPage()
     {
         Configure<ProfileManagementPageOptions>(options =>
         {
-            options.Contributors.Add(new CustomAccountProfileManagementPageContributor());
+            options.Contributors.AddFirst(new CustomAccountProfileManagementPageContributor());
         });
 
         Configure<AbpBundlingOptions>(options =>

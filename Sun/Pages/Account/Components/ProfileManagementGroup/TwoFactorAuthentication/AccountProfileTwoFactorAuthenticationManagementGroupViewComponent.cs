@@ -50,7 +50,6 @@ public class AccountProfileTwoFactorAuthenticationManagementGroupViewComponent :
 
         return View("~/Pages/Account/Components/ProfileManagementGroup/TwoFactorAuthentication/Default.cshtml", new TwoFactorAuthModel
         {
-            Key = key,
             OtpUri = otpauthUri,
             IsEnabled = user.TwoFactorEnabled,
             QrCodeBase64 = base64Image
@@ -59,7 +58,6 @@ public class AccountProfileTwoFactorAuthenticationManagementGroupViewComponent :
 
     public class TwoFactorAuthModel
     {
-        public string Key { get; set; }
         public string OtpUri { get; set; }
         public bool IsEnabled { get; set; }
         public string QrCodeBase64 { get; set; }

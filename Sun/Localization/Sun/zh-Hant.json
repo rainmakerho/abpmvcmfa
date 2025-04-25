@@ -5,6 +5,18 @@
     "Welcome_Title": "歡迎",
     "Welcome_Text": "這是 ABP 框架的極簡單層應用程序啟動模板.",
     "Menu:Home": "首頁",
-    "ProfileTab:TwoFactorAuthentication": "雙重驗證"
+    "ProfileTab:TwoFactorAuthentication": "雙重驗證",
+    "UserNotExist": "The user does not exist",
+    "EnableMfaFail": "無法啟用雙重身份驗證{0}",
+    "EnableMfaSuccess": "啟用雙重身份驗證成功",
+    "DisableMfaSuccess": "禁用雙重身份驗證成功",
+    "DisableMfa": "禁用雙重身份驗證",
+    "EnableMfa": "啟用雙重身份驗證",
+    "Confirm": "確認",
+    "AreYouSure": "你確定{0}嗎?",
+    "EnableMFAInfo": "你已啟用兩步驟驗證。",
+    "EnterVerificationCode": "輸入 6 碼驗證碼",
+    "UseGoogleAuthenticator": "請使用 Google Authenticator 掃描以下 QR Code："
+
   }
 }

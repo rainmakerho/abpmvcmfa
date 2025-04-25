@@ -1,0 +1,48 @@
+﻿@page
+@using Microsoft.AspNetCore.Mvc.Localization
+@using Volo.Abp.Account.Localization
+@using Volo.Abp.AspNetCore.Mvc.UI.Theming
+@using Sun.Pages.Account
+@using Sun.Localization
+@model LoginWith2faModel
+@inject IHtmlLocalizer<SunResource> L
+@inject IHtmlLocalizer<AccountResource> LA
+@inject IThemeManager ThemeManager
+@{
+    Layout = ThemeManager.CurrentTheme.GetAccountLayout();
+}
+
+@section scripts
+{
+    <abp-script-bundle name="@typeof(LoginWith2faModel).FullName">
+        <abp-script src="/Pages/Account/LoginWith2fa.js" />
+    </abp-script-bundle>
+}
+<div class="card mt-3 shadow-sm rounded">
+    <div class="card-body p-5">
+        <h4>@L["Login"]</h4>
+        <form method="post" class="mt-4">
+            <div class="mb-3">
+                <label asp-for="Input.TwoFactorCode" class="form-label">驗證碼</label>
+                <input asp-for="Input.TwoFactorCode" class="form-control" />
+                <span asp-validation-for="Input.TwoFactorCode" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="Input.RememberMachine" class="form-label">記住這個裝置</label>
+                <input asp-for="Input.RememberMachine" class="form-check-input" />
+                <span asp-validation-for="Input.RememberMachine" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="Input.RememberMe" class="form-label">記住我</label>
+                <input asp-for="Input.RememberMe" class="form-check-input" />
+                <span asp-validation-for="Input.RememberMe" class="text-danger"></span>
+            </div>
+            <div class="d-grid gap-2">
+                <abp-button type="submit" button-type="Primary" name="Action" value="Login" class="btn-lg mt-3">@LA["Login"]</abp-button>
+            </div>
+        </form>
+    </div>
+</div>
+
+

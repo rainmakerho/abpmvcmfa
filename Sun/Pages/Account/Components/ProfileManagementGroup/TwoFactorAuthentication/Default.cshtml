@@ -4,31 +4,26 @@
 @inject IHtmlLocalizer<SunResource> L
 @model AccountProfileTwoFactorAuthenticationManagementGroupViewComponent.TwoFactorAuthModel
 
-
-<h4>@L["兩步驟驗證"]</h4>
-<hr />
 <form id="TwoFactorAuthForm">
     <div class="mb-3">
-        @if (Model.IsEnabled)
-        {
-            <div class="alert alert-success">你已啟用兩步驟驗證。</div>
-        }
-        else
-        {
+        <div id="divDisableMFA">
+            <div class="alert alert-success">@L["EnableMFAInfo"]</div>
+            <abp-button id="btnDisableMFA" type="button" button-type="Danger" text="@L["DisableMfa"].Value" />
+        </div>
+        <div id="divEnableMFA">
             <div>
-                <p>請使用 Google Authenticator 掃描以下 QR Code：</p>
+                <p>@L["UseGoogleAuthenticator"]</p>
                 <img src="@Model.QrCodeBase64" alt="QR Code for Authenticator" class="img-fluid rounded border" width="150" height="150" />
             </div>
             <div class="mt-3">
-                <label for="verification-code" class="form-label">輸入 6 碼驗證碼</label>
-                <input id="verification-code" type="text" class="form-control" maxlength="6" />
+                <label for="verification-code" class="form-label">@L["EnterVerificationCode"]</label>
+                <input id="verification-code" type="text" class="form-control" maxlength="6" required />
             </div>
             <div class="mt-3">
-                <abp-button type="submit" button-type="Primary" text="啟用驗證" />
+                <abp-button type="submit" button-type="Primary" text="@L["EnableMfa"].Value" />
             </div>
-        }
+        </div>
     </div>
-
     
 </form>
 
