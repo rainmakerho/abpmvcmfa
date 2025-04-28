@@ -20,21 +20,22 @@
 }
 <div class="card mt-3 shadow-sm rounded">
     <div class="card-body p-5">
-        <h4>@L["Login"]</h4>
+        <h4>@L["MFAVerification"]</h4>
         <form method="post" class="mt-4">
             <div class="mb-3">
-                <label asp-for="Input.TwoFactorCode" class="form-label">驗證碼</label>
+                <label asp-for="Input.TwoFactorCode" class="form-label">
+                    @L["EnterVerificationCode"]</label>
                 <input asp-for="Input.TwoFactorCode" class="form-control" />
                 <span asp-validation-for="Input.TwoFactorCode" class="text-danger"></span>
             </div>
 
             <div class="mb-3">
-                <label asp-for="Input.RememberMachine" class="form-label">記住這個裝置</label>
+                <label asp-for="Input.RememberMachine" class="form-label">@L["RememberDevice"]</label>
                 <input asp-for="Input.RememberMachine" class="form-check-input" />
                 <span asp-validation-for="Input.RememberMachine" class="text-danger"></span>
             </div>
             <div class="mb-3">
-                <label asp-for="Input.RememberMe" class="form-label">記住我</label>
+                <label asp-for="Input.RememberMe" class="form-label">@L["RememberMe"]</label>
                 <input asp-for="Input.RememberMe" class="form-check-input" />
                 <span asp-validation-for="Input.RememberMe" class="text-danger"></span>
             </div>

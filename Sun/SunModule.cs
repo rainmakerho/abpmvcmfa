@@ -127,6 +127,7 @@ public class SunModule : AbpModule
 {
     /* Single point to enable/disable multi-tenancy */
     public const bool IsMultiTenant = false;
+    private bool _enableTwoFactor = false;
 
     public override void PreConfigureServices(ServiceConfigurationContext context)
     {
@@ -190,7 +191,7 @@ public class SunModule : AbpModule
         ConfigureLocalization();
         ConfigureNavigationServices();
         ConfigureEfCore(context);
-        ConfigureProfileManagementPage();
+        ConfigureProfileManagementPage(configuration);
     }
 
     private void ConfigureHealthChecks(ServiceConfigurationContext context)
@@ -388,7 +389,13 @@ public class SunModule : AbpModule
         {
             app.UseMultiTenancy();
         }
-        app.UseMiddleware<EnforceMfaMiddleware>();
+
+        if (_enableTwoFactor)
+        {
+            app.UseMiddleware<EnforceMfaMiddleware>();
+        }
+        
+
         app.UseUnitOfWork();
         app.UseDynamicClaims();
         app.UseAuthorization();
@@ -405,22 +412,25 @@ public class SunModule : AbpModule
         
     }
 
-    private void ConfigureProfileManagementPage()
+    private void ConfigureProfileManagementPage(IConfiguration configuration)
     {
-        Configure<ProfileManagementPageOptions>(options =>
+        _enableTwoFactor = configuration["Settings:Abp.Identity.TwoFactor"]?.ToLowerInvariant() == "true";
+        if (_enableTwoFactor)
         {
-            options.Contributors.AddFirst(new CustomAccountProfileManagementPageContributor());
-        });
+            Configure<ProfileManagementPageOptions>(options =>
+            {
+                options.Contributors.AddFirst(new CustomAccountProfileManagementPageContributor());
+            });
 
-        Configure<AbpBundlingOptions>(options =>
-        {
-            options.ScriptBundles.Configure(
-                typeof(ManageModel).FullName,
-                configuration =>
-                {
-                    configuration.AddFiles("/Pages/Account/Components/ProfileManagementGroup/TwoFactorAuthentication/Default.js");
-                });
-        });
-
+            Configure<AbpBundlingOptions>(options =>
+            {
+                options.ScriptBundles.Configure(
+                    typeof(ManageModel).FullName,
+                    configuration =>
+                    {
+                        configuration.AddFiles("/Pages/Account/Components/ProfileManagementGroup/TwoFactorAuthentication/Default.js");
+                    });
+            });
+        }
     }
 }

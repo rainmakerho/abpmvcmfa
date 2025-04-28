@@ -5,7 +5,7 @@
     "Welcome_Title": "Welcome",
     "Welcome_Text": "This is a minimalist, single layer application startup template for the ABP Framework.",
     "Menu:Home": "Home",
-    "ProfileTab:TwoFactorAuthentication": "Two Factor Authentication",
+    "ProfileTab:TwoFactorAuthentication": "Two-factor authentication settings",
     "UserNotExist": "The user does not exist",
     "EnableMfaFail": "Two-factor authentication can't be enabled:{0}",
     "EnableMfaSuccess": "Enable Two-factor authentication Sucessful",
@@ -16,6 +16,9 @@
     "AreYouSure": "Are You Sure {0}?",
     "EnableMFAInfo": "You've enabled Two-factor authentication.",
     "EnterVerificationCode": "Enter the 6-digit verification code",
-    "UseGoogleAuthenticator": "Please use Google Authenticator to scan the following QR Code:"
+    "UseGoogleAuthenticator": "Please use Google/Microsoft Authenticator to scan the following QR Code:",
+    "RememberMe": "Remember Me",
+    "RememberDevice": "Remember this device",
+    "MFAVerification": "Two-factor authentication"
   }
 }
