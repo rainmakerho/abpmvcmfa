@@ -17,6 +17,7 @@ MFA（多因素驗證）是提升帳號安全性的重要手段，能有效防�
 ## 執行畫面
 
 1. 使用者登入後，如果沒啟用 MFA ，則會被導到啟用 MFA 畫面
+   <br/>
    <img src="https://rainmakerho.github.io/2025/04/28/abp-framework-enable-mfa/07.png">
    <br/>
    <img src="https://rainmakerho.github.io/2025/04/28/abp-framework-enable-mfa/02.png">
