@@ -1,10 +1,8 @@
 ﻿@page
-
 @using Microsoft.AspNetCore.Mvc.Localization
 @using Sun.Localization
 @using Volo.Abp.Users
 @inject IHtmlLocalizer<SunResource> L
-
 @model Sun.Pages.IndexModel
 @inject ICurrentUser CurrentUser
 @section styles {
@@ -13,11 +11,7 @@
 @section scripts {
     <abp-script src="/Pages/Index.cshtml.js" />
 }
-<h3>Token Providers:</h3>
-@foreach (var provider in Model.TokenProviders)
-{
-    <div>@provider</div>
-}
+
 <div class="row mb-3">
     <div class="col-xl-6 col-12 d-flex">
         <div class="card h-lg-100 w-100 overflow-hidden">

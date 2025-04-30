@@ -8,17 +8,20 @@
     "ProfileTab:TwoFactorAuthentication": "Two-factor authentication settings",
     "UserNotExist": "The user does not exist",
     "EnableMfaFail": "Two-factor authentication can't be enabled:{0}",
-    "EnableMfaSuccess": "Enable Two-factor authentication Sucessful",
-    "DisableMfaSuccess": "Disable Two-factor authentication Sucessful",
+    "EnableMfaSuccess": "Enable Two-factor authentication Successful",
+    "DisableMfaSuccess": "Disable Two-factor authentication Successful",
     "DisableMfa": "Disable Two-factor authentication",
     "EnableMfa": "Enable Two-factor authentication",
     "Confirm": "Confirm",
-    "AreYouSure": "Are You Sure {0}?",
+    "AreYouSure": "Are you sure {0}?",
     "EnableMFAInfo": "You've enabled Two-factor authentication.",
     "EnterVerificationCode": "Enter the 6-digit verification code",
     "UseGoogleAuthenticator": "Please use Google/Microsoft Authenticator to scan the following QR Code:",
     "RememberMe": "Remember Me",
     "RememberDevice": "Remember this device",
-    "MFAVerification": "Two-factor authentication"
+    "MFAVerification": "Two-factor authentication",
+    "VerificationCodeError": "Verification code error",
+    "UserLockedOutMessage": "The user account has been locked out due to invalid login attempts. Please wait a while and try again.",
+    "UserLogoutOrSessionExpired": "The user has logged out or the session has expired"
   }
 }

@@ -12,7 +12,6 @@ namespace Sun.Data;
 public class SunDbMigrationService : ITransientDependency
 {
     public ILogger<SunDbMigrationService> Logger { get; set; }
-    private readonly IConfiguration _configuration;
 
     private readonly IDataSeeder _dataSeeder;
     private readonly SunDbSchemaMigrator _dbSchemaMigrator;
@@ -23,8 +22,7 @@ public class SunDbMigrationService : ITransientDependency
         IDataSeeder dataSeeder,
         SunDbSchemaMigrator dbSchemaMigrator,
         ITenantRepository tenantRepository,
-        ICurrentTenant currentTenant,
-        IConfiguration configuration)
+        ICurrentTenant currentTenant)
     {
         _dataSeeder = dataSeeder;
         _dbSchemaMigrator = dbSchemaMigrator;
@@ -32,7 +30,6 @@ public class SunDbMigrationService : ITransientDependency
         _currentTenant = currentTenant;
 
         Logger = NullLogger<SunDbMigrationService>.Instance;
-        _configuration = configuration;
     }
 
     public async Task MigrateAsync()
@@ -97,11 +94,10 @@ public class SunDbMigrationService : ITransientDependency
     private async Task SeedDataAsync(Tenant? tenant = null)
     {
         Logger.LogInformation($"Executing {(tenant == null ? "host" : tenant.Name + " tenant")} database seed...");
-        var adminEmail = _configuration["Settings:Abp.Identity.Admin.Email"];
-        var adminPd = _configuration["Settings:Abp.Identity.Admin.Pwd"];
+        
         await _dataSeeder.SeedAsync(new DataSeedContext(tenant?.Id)
-            .WithProperty(IdentityDataSeedContributor.AdminEmailPropertyName, adminEmail)
-            .WithProperty(IdentityDataSeedContributor.AdminPasswordPropertyName, adminPd)
+            .WithProperty(IdentityDataSeedContributor.AdminEmailPropertyName, IdentityDataSeedContributor.AdminEmailDefaultValue)
+            .WithProperty(IdentityDataSeedContributor.AdminPasswordPropertyName, IdentityDataSeedContributor.AdminPasswordDefaultValue)
         );
     }
 

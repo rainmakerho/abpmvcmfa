@@ -1,4 +1,4 @@
-﻿@page
+@page
 @using Microsoft.AspNetCore.Mvc.Localization
 @using Volo.Abp.Account.Localization
 @using Volo.Abp.AspNetCore.Mvc.UI.Theming
@@ -30,20 +30,19 @@
             </div>
 
             <div class="mb-3">
-                <label asp-for="Input.RememberMachine" class="form-label">@L["RememberDevice"]</label>
                 <input asp-for="Input.RememberMachine" class="form-check-input" />
+                <label asp-for="Input.RememberMachine" class="form-label">@L["RememberDevice"]</label>
                 <span asp-validation-for="Input.RememberMachine" class="text-danger"></span>
             </div>
             <div class="mb-3">
-                <label asp-for="Input.RememberMe" class="form-label">@L["RememberMe"]</label>
                 <input asp-for="Input.RememberMe" class="form-check-input" />
+                <label asp-for="Input.RememberMe" class="form-label">@L["RememberMe"]</label>
                 <span asp-validation-for="Input.RememberMe" class="text-danger"></span>
             </div>
             <div class="d-grid gap-2">
-                <abp-button type="submit" button-type="Primary" name="Action" value="Login" class="btn-lg mt-3">@LA["Login"]</abp-button>
+                <abp-button type="submit" button-type="Primary" name="Action" value="Login"
+                    class="btn-lg mt-3">@LA["Login"]</abp-button>
             </div>
         </form>
     </div>
 </div>
-
-

@@ -1,80 +1,29 @@
-# Sun
+# 從零開始：在 ABP MVC 專案中實現多因素驗證 (MFA) 的完整教學
 
 ## About this solution
 
-This is a minimalist, non-layered startup solution with the ABP Framework. All the fundamental ABP modules are already installed.
+MFA（多因素驗證）是提升帳號安全性的重要手段，能有效防止因密碼洩漏而導致的未授權存取。然而，在 ABP Framework 中，若想使用官方完整支援的 MFA 功能，通常需要升級至 Pro 版本。
+
+事實上，ASP.NET Core Identity 本身就內建了基本的 MFA 支援。若不追求 Pro 版那種進階與全面的安全機制，只想啟用一般的多因素驗證功能，其實只需透過少量設定與簡單的 UI 介面，就能達成大部分的實務需求。
+
+本專案在 ABP MVC 中，加入啟用/停用 MFA 的相關功能。
 
 ### Pre-requirements
 
-* [.NET9.0+ SDK](https://dotnet.microsoft.com/download/dotnet)
-* [Node v18 or 20](https://nodejs.org/en)
+- [.NET9.0+ SDK](https://dotnet.microsoft.com/download/dotnet)
+- [Node v18 or 20](https://nodejs.org/en)
+- [ABP v9.1](https://abp.io/)
 
-## Before running the application
+## 執行畫面
 
-### Generating a Signing Certificate
+1. 使用者登入後，如果沒啟用 MFA ，則會被導到啟用 MFA 畫面
+   <img src="https://rainmakerho.github.io/2025/04/28/abp-framework-enable-mfa/07.png">
+   <br/>
+   <img src="https://rainmakerho.github.io/2025/04/28/abp-framework-enable-mfa/02.png">
 
-In the production environment, you need to use a production signing certificate. ABP Framework sets up signing and encryption certificates in your application and expects an `openiddict.pfx` file in your application.
-
-This certificate is already generated when you created the solution, so most of the time you don't need to generate it yourself. However, if you need to generate a certificate, you can use the following command:
-
-```bash
-dotnet dev-certs https -v -ep openiddict.pfx -p a5a2ab70-c3f3-4102-b101-f4ffbdb9577e
-```
-
-> `a5a2ab70-c3f3-4102-b101-f4ffbdb9577e` is the password of the certificate, you can change it to any password you want.
-
-It is recommended to use **two** RSA certificates, distinct from the certificate(s) used for HTTPS: one for encryption, one for signing.
-
-For more information, please refer to: [OpenIddict Certificate Configuration](https://documentation.openiddict.com/configuration/encryption-and-signing-credentials.html#registering-a-certificate-recommended-for-production-ready-scenarios)
-
-> Also, see the [Configuring OpenIddict](https://abp.io/docs/latest/Deployment/Configuring-OpenIddict#production-environment) documentation for more information.
-
-### Install Client-Side libraries
-
-Run the following command in your solution directory. This step is automatically done when you create a new solution, if you didn't especially disabled it. However, you should run it yourself if you have first cloned this solution from your source control, or added a new client-side package dependency to your solution.
-
-```bash
-abp install-libs
-```
-
-> This command installs all NPM packages for MVC/Razor Pages and Blazor Server UIs and this command is already run by the ABP CLI, so most of the time you don't need to run this command manually.
-
-## How to run
-
-The application needs a database. Run the following command in the [Sun](./Sun) project directory to migrate the database and seed the initial data. This step is automatically done when you create a new solution, if you didn't especially disable it.
-
-````bash
-dotnet run --migrate-database
-````
-
-This command will create and seed the initial database. Then you can run the application with any IDE that supports .NET.
-
-Happy coding..!
-
-## Deploying the application
-
-Deploying an ABP application follows the same process as deploying any .NET or ASP.NET Core application. However, there are important considerations to keep in mind. For detailed guidance, refer to ABP's [deployment documentation](https://abp.io/docs/latest/Deployment/Index).
-
-### How to deploy on Docker
-
-The application provides the related `Dockerfiles` and `docker-compose` file with scripts. You can build the docker images and run them using docker-compose. The necessary database, DbMigrator, and the application will be running on docker with health checks in an isolated docker network.
-
-#### Creating the Docker images
-
-Navigate to [etc/build](./etc/build) folder and run the `build-images-locally.ps1` script. You can examine the script to set **image tag** for your images. It is `latest` by default.
-
-#### Running the Docker images using Docker-Compose
-
-Navigate to [etc/docker](./etc/docker) folder and run the `run-docker.ps1` script. The script will generate developer certificates (if it doesn't exist already) with `dotnet dev-certs` command to use HTTPS. Then, the script runs the provided docker-compose file on detached mode.
-
-> Not: Developer certificate is only valid for **localhost** domain. If you want to deploy to a real DNS in a production environment, use LetsEncrypt or similar tools.
-
-#### Stopping the Docker containers
-
-Navigate to [etc/docker](./etc/docker) folder and run the `stop-docker.ps1` script. The script stops and removes the running containers.
+2. 使用者啟用 MFA 後，下次登入後，會需要輸入 MFA 驗證碼來登入驗證。
+   <img src="https://rainmakerho.github.io/2025/04/28/abp-framework-enable-mfa/06.png">
 
 ### Additional resources
 
-You can see the following resources to learn more about your solution and the ABP Framework:
-
-* [Application (Single Layer) Startup Template](https://abp.io/docs/latest/startup-templates/application-single-layer/index)
+- [從零開始：在 ABP MVC 專案中實現多因素驗證 (MFA) 的完整教學](https://rainmakerho.github.io/2025/04/28/abp-framework-enable-mfa/)

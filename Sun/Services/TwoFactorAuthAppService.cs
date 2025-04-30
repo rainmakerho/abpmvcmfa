@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Identity;
 using Volo.Abp;
 using IdentityUser = Volo.Abp.Identity.IdentityUser;
 
@@ -8,8 +7,6 @@ namespace Sun.Services;
 public class TwoFactorAuthAppService : SunAppService
 {
     private readonly UserManager<Volo.Abp.Identity.IdentityUser> _userManager;
-
-
 
     public TwoFactorAuthAppService(UserManager<Volo.Abp.Identity.IdentityUser> userManager)
     {
@@ -26,7 +23,8 @@ public class TwoFactorAuthAppService : SunAppService
         var user = await GetUser();
         return user.TwoFactorEnabled;
     }
-    public async Task EnableTwoFactorAsync( bool isEnable)
+
+    public async Task EnableTwoFactorAsync(bool isEnable)
     {
         var user = await GetUser();
         if (user == null)
@@ -38,12 +36,12 @@ public class TwoFactorAuthAppService : SunAppService
         var result = await _userManager.SetTwoFactorEnabledAsync(user, isEnable);
         if (!result.Succeeded)
         {
-            throw new UserFriendlyException(L["EnableMfaFail", string.Join(",", result.Errors.Select(err=>err.ToString()))]);
+            throw new UserFriendlyException(L["EnableMfaFail", string.Join(",", result.Errors.Select(err => err.ToString()))]);
         }
         await _userManager.UpdateAsync(user);
     }
 
-    public async Task<bool> VerifyTwoFactorToken( string code)
+    public async Task<bool> VerifyTwoFactorToken(string code)
     {
 
         var user = await GetUser();
@@ -54,6 +52,11 @@ public class TwoFactorAuthAppService : SunAppService
 
         var isValid = await _userManager.VerifyTwoFactorTokenAsync(
             user, TokenOptions.DefaultAuthenticatorProvider, code);
+        if (!isValid)
+        {
+            throw new UserFriendlyException(L["VerificationCodeError"]);
+        }
+
         await EnableTwoFactorAsync(true);
         return isValid;
     }

@@ -5,6 +5,3 @@
     --lpx-logo-icon: url('/images/logo/leptonxlite/logo-light-thumbnail.png');
 }
 
-.lpx-topbar-content .nav-link[href="/Account/Login"] {
-    display: none;
-} 

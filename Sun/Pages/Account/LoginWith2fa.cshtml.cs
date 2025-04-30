@@ -1,27 +1,11 @@
-﻿using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
-using System;
-using System.Collections.Generic;
+using Microsoft.AspNetCore.Mvc.Localization;
+using Sun.Localization;
 using System.ComponentModel.DataAnnotations;
-using System.Diagnostics;
-using System.Linq;
-using System.Security.Claims;
-using System.Threading.Tasks;
-using Volo.Abp.Account.Settings;
+using Volo.Abp.Account.Localization;
 using Volo.Abp.AspNetCore.Mvc.UI.RazorPages;
-using Volo.Abp.Auditing;
-using Volo.Abp.Identity;
-using Volo.Abp.Identity.AspNetCore;
-using Volo.Abp.Security.Claims;
-using Volo.Abp.Settings;
-using Volo.Abp.Validation;
 using IdentityUser = Volo.Abp.Identity.IdentityUser;
-using SignInResult = Microsoft.AspNetCore.Identity.SignInResult;
 
 namespace Sun.Pages.Account;
 
@@ -31,14 +15,18 @@ public class LoginWith2faModel : AbpPageModel
 
     public LoginWith2faModel(SignInManager<IdentityUser> signInManager)
     {
+        LocalizationResourceType = typeof(SunResource);
         _signInManager = signInManager;
+
     }
 
     [BindProperty]
     public InputModel Input { get; set; } = new();
 
-
-
+    public void OnGet()
+    {
+        Input.RememberMe = TempData.ContainsKey("remember_me") && Convert.ToBoolean(TempData["remember_me"]);
+    }
     public async Task<IActionResult> OnPostAsync()
     {
         ValidateModel();
@@ -46,7 +34,7 @@ public class LoginWith2faModel : AbpPageModel
 
         if (user == null)
         {
-            Alerts.Warning("使用者已登出或會話過期");
+            Alerts.Warning(L["UserLogoutOrSessionExpired"]);
             return RedirectToPage("/Login");
         }
 
@@ -63,11 +51,12 @@ public class LoginWith2faModel : AbpPageModel
 
         if (result.IsLockedOut)
         {
-            Alerts.Warning("帳號已被鎖定");
+
+            Alerts.Warning(L["UserLockedOutMessage"]);
             return Page();
         }
 
-        Alerts.Warning("驗證碼錯誤");
+        Alerts.Warning(L["VerificationCodeError"]);
         return Page();
     }
 

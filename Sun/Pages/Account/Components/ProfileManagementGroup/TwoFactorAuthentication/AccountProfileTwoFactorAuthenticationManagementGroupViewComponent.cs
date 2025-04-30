@@ -1,9 +1,7 @@
-﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using QRCoder;
-using System.Threading.Tasks;
 using Volo.Abp.AspNetCore.Mvc;
-using Volo.Abp.Identity;
 using Volo.Abp.Users;
 using IdentityUser = Volo.Abp.Identity.IdentityUser;
 
@@ -27,7 +25,7 @@ public class AccountProfileTwoFactorAuthenticationManagementGroupViewComponent :
 
     public async Task<IViewComponentResult> InvokeAsync()
     {
-        
+
         var user = await _userManager.FindByEmailAsync(_currentUser.Email);
 
         var key = await _userManager.GetAuthenticatorKeyAsync(user);

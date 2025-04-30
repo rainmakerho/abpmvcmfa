@@ -1,4 +1,4 @@
-﻿@using Microsoft.AspNetCore.Mvc.Localization
+@using Microsoft.AspNetCore.Mvc.Localization
 @using Sun.Localization
 @using Sun.Pages.Account.Components.ProfileManagementGroup.TwoFactorAuthentication
 @inject IHtmlLocalizer<SunResource> L
@@ -13,7 +13,8 @@
         <div id="divEnableMFA">
             <div>
                 <p>@L["UseGoogleAuthenticator"]</p>
-                <img src="@Model.QrCodeBase64" alt="QR Code for Authenticator" class="img-fluid rounded border" width="150" height="150" />
+                <img src="@Model.QrCodeBase64" alt="QR Code for Authenticator" class="img-fluid rounded border"
+                    width="150" height="150" />
             </div>
             <div class="mt-3">
                 <label for="verification-code" class="form-label">@L["EnterVerificationCode"]</label>
@@ -24,11 +25,4 @@
             </div>
         </div>
     </div>
-    
 </form>
-
-
-
-
-
-

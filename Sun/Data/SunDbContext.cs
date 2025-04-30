@@ -16,7 +16,7 @@ namespace Sun.Data;
 public class SunDbContext : AbpDbContext<SunDbContext>
 {
     
-    public const string DbTablePrefix = "Sun";
+    public const string DbTablePrefix = "App";
     public const string DbSchema = null;
 
     public SunDbContext(DbContextOptions<SunDbContext> options)

@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity;
 using Volo.Abp.Uow;
 using IdentityUser = Volo.Abp.Identity.IdentityUser;
 
@@ -32,7 +32,8 @@ public class EnforceMfaMiddleware
                 var isMfaEnabled = await userManager.GetTwoFactorEnabledAsync(user);
                 var unitOfWorkManager = context.RequestServices.GetRequiredService<IUnitOfWorkManager>();
                 var hasAuthenticatorKey = false;
-                using (var uow = unitOfWorkManager.Begin(requiresNew: true)) {
+                using (var uow = unitOfWorkManager.Begin(requiresNew: true))
+                {
                     hasAuthenticatorKey = !string.IsNullOrWhiteSpace(await userManager.GetAuthenticatorKeyAsync(user));
                 }
                 if (!isMfaEnabled || !hasAuthenticatorKey)
@@ -46,4 +47,3 @@ public class EnforceMfaMiddleware
         await _next(context);
     }
 }
-

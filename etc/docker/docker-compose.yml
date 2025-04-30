@@ -13,7 +13,7 @@ services:
       - Kestrel__Certificates__Default__Password=91f91912-5ab0-49df-8166-23377efaf3cc
       - ConnectionStrings__Default=Data Source=sql-server;Initial Catalog=Sun;User Id=sa;Password=myPassw0rd;MultipleActiveResultSets=true;TrustServerCertificate=True;
     ports:
-      - "44326:443"
+      - "44350:443"
     depends_on:
       sql-server:
         condition: service_healthy

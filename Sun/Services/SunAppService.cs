@@ -9,6 +9,5 @@ public abstract class SunAppService : ApplicationService
     protected SunAppService()
     {
         LocalizationResource = typeof(SunResource);
-        
     }
 }
